@@ -63,6 +63,8 @@
             margin: 30px auto;
             position: relative;
             animation: roseOpen 4s ease-in-out forwards;
+            background: rgba(255, 255, 255, 0.1); /* Fallback background */
+            min-height: 400px;
         }
         @keyframes roseOpen {
             0% { transform: scale(0.3) rotate(15deg); opacity: 0.5; }
@@ -75,30 +77,29 @@
             margin: 0 auto;
             animation: bloom 2s ease-in-out infinite alternate;
             filter: drop-shadow(0 0 20px rgba(255, 64, 64, 0.5));
+            stroke: #fff8e1;
+            stroke-width: 2;
+            fill-opacity: 1;
         }
         @keyframes bloom {
             0% { transform: scale(1) rotate(0deg); }
-            100% { transform: scale(1.1) rotate(5deg); }
+            100% { transform: scale(1.15) rotate(5deg); }
         }
         .petal {
             animation: petalBloom 1.5s ease-in infinite alternate;
             transform-origin: center;
         }
-        .leaf {
+        .leaf, .stem {
             animation: leafBloom 1.5s ease-in infinite alternate;
             transform-origin: center;
         }
-        .stem {
-            animation: leafBloom 1.5s ease-in infinite alternate;
-            transform-origin: bottom;
-        }
         @keyframes petalBloom {
-            0% { transform: scale(0.95); }
-            100% { transform: scale(1.05); }
+            0% { transform: scale(0.9); }
+            100% { transform: scale(1.15); }
         }
         @keyframes leafBloom {
-            0% { transform: scale(0.95) translateY(5px); }
-            100% { transform: scale(1.05) translateY(0); }
+            0% { transform: scale(0.9) translateY(5px); }
+            100% { transform: scale(1.15) translateY(0); }
         }
         .sparkle {
             position: absolute;
@@ -134,6 +135,11 @@
             margin-top: 20px;
             text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
         }
+        .fallback {
+            font-size: 24px;
+            color: #ff4040;
+            display: none;
+        }
         @media (max-width: 600px) {
             h1 { font-size: 36px; }
             #days { font-size: 36px; }
@@ -149,19 +155,24 @@
     <p id="days"></p>
     <div id="rose-container">
         <svg id="rose" viewBox="0 0 200 300" xmlns="http://www.w3.org/2000/svg">
+            <!-- Fallback circle if SVG fails -->
+            <circle cx="100" cy="100" r="50" fill="#ff0000" class="fallback"/>
             <!-- Stem -->
-            <rect class="stem" x="95" y="150" width="10" height="100" fill="#006400"/>
+            <rect class="stem" x="95" y="120" width="10" height="150" fill="#006400"/>
             <!-- Leaves -->
-            <ellipse class="leaf" cx="80" cy="200" rx="20" ry="10" fill="#228b22" transform="rotate(-45 80 200)"/>
-            <ellipse class="leaf" cx="120" cy="200" rx="20" ry="10" fill="#228b22" transform="rotate(45 120 200)"/>
+            <ellipse class="leaf" cx="75" cy="200" rx="25" ry="10" fill="#228b22" transform="rotate(-45 75 200)"/>
+            <ellipse class="leaf" cx="125" cy="200" rx="25" ry="10" fill="#228b22" transform="rotate(45 125 200)"/>
             <!-- Petals -->
-            <circle class="petal" cx="100" cy="100" r="30" fill="#ff0000"/>
-            <circle class="petal" cx="80" cy="80" r="25" fill="#ff4040"/>
-            <circle class="petal" cx="120" cy="80" r="25" fill="#ff4040"/>
-            <circle class="petal" cx="70" cy="110" r="25" fill="#ff4040"/>
-            <circle class="petal" cx="130" cy="110" r="25" fill="#ff4040"/>
-            <circle class="petal" cx="100" cy="70" r="20" fill="#ff6666"/>
+            <circle class="petal" cx="100" cy="80" r="35" fill="#ff0000"/>
+            <circle class="petal" cx="75" cy="60" r="30" fill="#ff4040"/>
+            <circle class="petal" cx="125" cy="60" r="30" fill="#ff4040"/>
+            <circle class="petal" cx="65" cy="90" r="30" fill="#ff4040"/>
+            <circle class="petal" cx="135" cy="90" r="30" fill="#ff4040"/>
+            <circle class="petal" cx="85" cy="110" r="30" fill="#ff4040"/>
+            <circle class="petal" cx="115" cy="110" r="30" fill="#ff4040"/>
+            <circle class="petal" cx="100" cy="50" r="25" fill="#ff6666"/>
         </svg>
+        <p class="fallback">Se a rosa não aparecer, veja o console (F12) e me avise!</p>
     </div>
     <div id="more-roses"></div>
     <script>
@@ -195,8 +206,11 @@
 
         const more = document.createElement('p');
         more.className = 'more-roses';
-        more.innerHTML = `Uma rosa eterna representando nossos ${diffDays} dias – e muitos mais no nosso jardim de amor! 💐`;
+        more.innerHTML = `Uma rosa eterna representando nossos ${diffDays} dias e muitos mais no nosso jardim de amor! 💐`;
         document.getElementById('more-roses').appendChild(more);
+
+        // Debug: Log to console to check if SVG is loading
+        console.log('SVG rose loaded. If not visible, check for errors in this console.');
     </script>
 </body>
 </html>
