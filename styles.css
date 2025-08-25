@@ -1,0 +1,132 @@
+body {
+    margin: 0;
+    padding: 40px;
+    background: linear-gradient(135deg, #a61c5e 0%, #ffc1cc 100%);
+    font-family: 'Cinzel', serif;
+    color: #fff;
+    text-align: center;
+    overflow-x: hidden;
+    position: relative;
+}
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><path d="M100 30c-20 0-40 20-50 40-10-20-30-40-50-40 20 40 20 60 50 80 0-20 10-40 50-40s50 20 50 40c30-20 30-40 50-80-20-20-40-40-50-40z" fill="rgba(255, 20, 147, 0.2)"/></svg>') repeat;
+    opacity: 0.4;
+    z-index: -1;
+}
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255, 192, 203, 0.2), transparent);
+    z-index: -1;
+}
+h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 56px;
+    color: #fff;
+    margin-bottom: 30px;
+    line-height: 1.4;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    animation: writeText 3s ease-in forwards;
+}
+@keyframes writeText {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+#days {
+    font-size: 48px;
+    color: #ff4040;
+    font-weight: 700;
+    margin: 20px 0;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+}
+#rose-container {
+    max-width: 600px;
+    margin: 30px auto;
+    position: relative;
+    animation: roseOpen 4s ease-in-out forwards;
+}
+@keyframes roseOpen {
+    0% { transform: scale(0.3) rotate(15deg); opacity: 0.5; }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+#rose {
+    width: 100%;
+    max-width: 400px;
+    display: block;
+    margin: 0 auto;
+    animation: bloom 2s ease-in-out infinite alternate;
+    filter: drop-shadow(0 0 20px rgba(255, 64, 64, 0.5));
+}
+@keyframes bloom {
+    0% { transform: scale(1) rotate(0deg); }
+    100% { transform: scale(1.1) rotate(5deg); }
+}
+.petals {
+    transform-origin: center;
+    animation: petalBloom 1.5s ease-in infinite alternate;
+}
+.leaves {
+    transform-origin: bottom;
+    animation: leafBloom 1.5s ease-in infinite alternate;
+}
+@keyframes petalBloom {
+    0% { transform: scale(0.95); }
+    100% { transform: scale(1.05); }
+}
+@keyframes leafBloom {
+    0% { transform: scale(0.95) translateY(5px); }
+    100% { transform: scale(1.05) translateY(0); }
+}
+.sparkle {
+    position: absolute;
+    font-size: 24px;
+    color: #ff69b4;
+    animation: sparkle 2.5s infinite;
+    pointer-events: none;
+    z-index: 2;
+}
+@keyframes sparkle {
+    0% { opacity: 0; transform: translateY(0); }
+    50% { opacity: 1; }
+    100% { opacity: 0; transform: translateY(-50px); }
+}
+.petal {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 2c-5 0-10 5-10 10s5 10 10 10 10-5 10-10-5-10-10-10z" fill="%23ff4040"/></svg>');
+    background-size: contain;
+    animation: fall 5s linear infinite;
+    pointer-events: none;
+    z-index: -1;
+}
+@keyframes fall {
+    0% { transform: translateY(-100vh) rotate(0deg); }
+    100% { transform: translateY(100vh) rotate(360deg); }
+}
+.more-roses {
+    font-family: 'Great Vibes', cursive;
+    font-size: 32px;
+    color: #fff;
+    margin-top: 20px;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+}
+@media (max-width: 600px) {
+    h1 { font-size: 36px; }
+    #days { font-size: 36px; }
+    #rose { max-width: 300px; }
+    .sparkle { font-size: 18px; }
+    .petal { width: 15px; height: 15px; }
+    .more-roses { font-size: 24px; }
+}
